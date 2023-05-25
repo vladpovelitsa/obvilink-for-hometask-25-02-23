@@ -1,0 +1,128 @@
+.nav {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-100%);
+  background: #fff;
+  transition: .5s;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  gap: 30px;
+
+  #nav-toggler:checked ~ & {
+    transform: translateX(0%);
+    opacity: 1;
+    pointer-events: unset;
+  }
+
+  &__list {
+    list-style: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__link {
+    color: var(--main-dark);
+    display: block;
+    margin-bottom: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    line-height: 1.4;
+  }
+
+  .button {
+    max-width: 120px;
+  }
+
+  @media screen and (min-width: 767px) {
+    position: static;
+    width: auto;
+    height: auto;
+    transform: translateX(0%);
+    opacity: 1;
+    pointer-events: unset;
+    background: transparent;
+    flex-direction: row-reverse;
+    padding: 0;
+    &__logo {
+      display: none;
+    }
+    &__list {
+      display: flex;
+      gap: 15px;
+    }
+    &__link {
+      margin-bottom: 0;
+    }
+    &__item {
+      &_mobile-only {
+        display: none;
+      }
+    }
+    .button {
+      min-width: 120px;
+    }
+  }
+}
+
+.nav-switch {
+  position: relative;
+  display: block;
+  min-width: 24px;
+  height: 15px;
+  z-index: 100;
+
+  span {
+    width: 100%;
+    height: 1px;
+    background: var(--main-dark);
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: .3s;
+
+    &:nth-child(1) {
+      top: 0;
+    }
+
+    &:nth-child(2) {
+      top: 7px;
+      max-width: 18px;
+    }
+
+    &:nth-child(3) {
+      top: 14px;
+    }
+  }
+
+  #nav-toggler:checked ~ & {
+    span {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(225deg);
+
+      &:nth-child(2) {
+        transform: translate(-50%, -50%) rotate(-225deg);
+        max-width: 100%;
+      }
+
+      &:nth-child(3) {
+        opacity: 0;
+      }
+    }
+  }
+
+  @media screen and (min-width: 767px) {
+    display: none;
+  }
+}
